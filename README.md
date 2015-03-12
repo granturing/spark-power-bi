@@ -1,5 +1,5 @@
-# spark-powerbi
-A library for pushing data from Spark, Spark SQL, or Spark Streaming to [Power BI](https://powerbi.com/).
+# spark-power-bi
+A library for pushing data from Spark, SparkSQL, or Spark Streaming to [Power BI](https://powerbi.com/).
 
 ## Requirements
 This library is built for Spark 1.2+
