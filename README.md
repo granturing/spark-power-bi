@@ -15,6 +15,27 @@ spark.powerbi.password
 spark.powerbi.clientid
 ```
 
+Rather than using your personal AD credentials for publishing data, you may want to create a service account instead. Then you can logon to Power BI using that account and share the data sets and dashboards with other users in your organization. Unfortunately, there's currently no other way of authenticating to Power BI. Hopefully in the future there'll be an organization-level API token that can publish shared data sets, without having to use an actual AD account.
+
+### Setting Up Azure Active Directory
+You'll need to create an application within your Azure AD in order to have a client id to publish data sets.
+
+1. Using the Azure management portal, open up your directory and add a new Application (under the Apps tab)
+2. Select "Add an application my organization is developing"
+![step0](http://granturing.github.io/spark-power-bi/images/AD_Setup_0.png)
+3. Enter any name you want and select "Native Client Application"
+![step1](http://granturing.github.io/spark-power-bi/images/AD_Setup_1.png)
+4. Enter a redirect URI, this can be anything since it won't be used
+![step2](http://granturing.github.io/spark-power-bi/images/AD_Setup_2.png)
+5. Once the app has been added you need to grant permissions, click "Add application"
+![step3](http://granturing.github.io/spark-power-bi/images/AD_Setup_3.png)
+6. Select the "Power BI Service"
+![step4](http://granturing.github.io/spark-power-bi/images/AD_Setup_4.png)
+7. Add all 3 of the delegated permissions
+![step5](http://granturing.github.io/spark-power-bi/images/AD_Setup_5.png)
+8. Save your changes and use the newly assigned client id for the `spark.powerbi.clientid` property
+![step6](http://granturing.github.io/spark-power-bi/images/AD_Setup_6.png)
+
 ## Spark Core
 ```
 import com.granturing.spark.powerbi._
