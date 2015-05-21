@@ -1,7 +1,5 @@
-scalaVersion := "2.10.4"
-
-resolvers += "sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/"
-
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.11.2")
+resolvers += "Spark Package Main Repo" at "https://dl.bintray.com/spark-packages/maven"
 
 addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "0.6.0")
+
+addSbtPlugin("org.spark-packages" % "sbt-spark-package" % "0.2.0")
