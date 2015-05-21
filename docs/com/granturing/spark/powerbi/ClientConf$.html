@@ -176,6 +176,19 @@
       </span>
       </h4>
       
+    </li><li name="com.granturing.spark.powerbi.ClientConf#MAX_PARTITIONS" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MAX_PARTITIONS:Int"></a>
+      <a id="MAX_PARTITIONS:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">MAX_PARTITIONS</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      
     </li><li name="com.granturing.spark.powerbi.ClientConf#TOKEN_RESOURCE_DEFAULT" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="TOKEN_RESOURCE_DEFAULT:String"></a>
       <a id="TOKEN_RESOURCE_DEFAULT:String"></a>
@@ -291,7 +304,7 @@
         <span class="name">fromSparkConf</span><span class="params">(<span name="conf">conf: <span class="extype" name="org.apache.spark.SparkConf">SparkConf</span></span>)</span><span class="result">: <a href="ClientConf.html" class="extype" name="com.granturing.spark.powerbi.ClientConf">ClientConf</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Generates a PowerBI client configuration for credentials, URIs, and OAuth client id.</p><div class="fullcomment"><div class="comment cmt"><p>Generates a PowerBI client configuration for credentials, URIs, and OAuth client id.</p><p>Settings are:</p><p>spark.powerbi.token.uri - The OAuth token URI to authenticate against (default: https://login.windows.net/common/oauth2/token)</p><p>spark.powerbi.token.resource - The OAuth resource to authenticate for (default: https://analysis.windows.net/powerbi/api)</p><p>spark.powerbi.uri - The PowerBI API URI (default: https://api.powerbi.com/beta/myorg)</p><p>spark.powerbi.username - The Azure Active Directory account name to authenticate with</p><p>spark.powerbi.password - The Azure Active Directory account password to authenticate with</p><p>spark.pwerbi.clientid - The OAuth client id</p><p>spark.powerbi.timeout - The response timeout in seconds for API calls (default: 30 seconds)
+      <p class="shortcomment cmt">Generates a PowerBI client configuration for credentials, URIs, and OAuth client id.</p><div class="fullcomment"><div class="comment cmt"><p>Generates a PowerBI client configuration for credentials, URIs, and OAuth client id.</p><p>Settings are:</p><p>spark.powerbi.token.uri - The OAuth token URI to authenticate against (default: https://login.windows.net/common/oauth2/token)</p><p>spark.powerbi.token.resource - The OAuth resource to authenticate for (default: https://analysis.windows.net/powerbi/api)</p><p>spark.powerbi.uri - The PowerBI API URI (default: https://api.powerbi.com/beta/myorg)</p><p>spark.powerbi.username - The Azure Active Directory account name to authenticate with</p><p>spark.powerbi.password - The Azure Active Directory account password to authenticate with</p><p>spark.pwerbi.clientid - The OAuth client id</p><p>spark.powerbi.timeout - The response timeout in seconds for API calls (default: 30 seconds)</p><p>spark.powerbi.max_partitions - The max number of partitions when saving (default: 5)
 </p></div><dl class="paramcmts block"><dt class="param">conf</dt><dd class="cmt"><p>a Spark configuration object with the application settings</p></dd><dt>returns</dt><dd class="cmt"><p>a PowerBI client configuration
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">

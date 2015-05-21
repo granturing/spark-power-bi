@@ -35,14 +35,14 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">ClientConf</span><span class="params">(<span name="token_uri">token_uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="resource">resource: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="uri">uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="clientid">clientid: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeout">timeout: <span class="extype" name="scala.concurrent.duration.Duration">Duration</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">ClientConf</span><span class="params">(<span name="token_uri">token_uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="resource">resource: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="uri">uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="clientid">clientid: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeout">timeout: <span class="extype" name="scala.concurrent.duration.Duration">Duration</span></span>, <span name="maxPartitions">maxPartitions: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Specifies the client configuration options for connecting to the PowerBI service.
 See <a href="ClientConf$.html#fromSparkConf(conf:org.apache.spark.SparkConf):com.granturing.spark.powerbi.ClientConf" class="extmbr" name="com.granturing.spark.powerbi.ClientConf#fromSparkConf">com.granturing.spark.powerbi.ClientConf.fromSparkConf</a> for generating
 from Spark configuration.
-</p></div><dl class="paramcmts block"><dt class="param">token_uri</dt><dd class="cmt"><p>the OAuth token URI to authenticate against</p></dd><dt class="param">resource</dt><dd class="cmt"><p>the OAuth resource to authenticate for</p></dd><dt class="param">uri</dt><dd class="cmt"><p>the PowerBI API URI</p></dd><dt class="param">username</dt><dd class="cmt"><p>the Azure Active Directory account name to authenticate with</p></dd><dt class="param">password</dt><dd class="cmt"><p>the Azure Active Directory account password to authenticate with</p></dd><dt class="param">clientid</dt><dd class="cmt"><p>the OAuth client id</p></dd><dt class="param">timeout</dt><dd class="cmt"><p>the response timeout in seconds for API calls
+</p></div><dl class="paramcmts block"><dt class="param">token_uri</dt><dd class="cmt"><p>the OAuth token URI to authenticate against</p></dd><dt class="param">resource</dt><dd class="cmt"><p>the OAuth resource to authenticate for</p></dd><dt class="param">uri</dt><dd class="cmt"><p>the PowerBI API URI</p></dd><dt class="param">username</dt><dd class="cmt"><p>the Azure Active Directory account name to authenticate with</p></dd><dt class="param">password</dt><dd class="cmt"><p>the Azure Active Directory account password to authenticate with</p></dd><dt class="param">clientid</dt><dd class="cmt"><p>the OAuth client id</p></dd><dt class="param">timeout</dt><dd class="cmt"><p>the response timeout in seconds for API calls</p></dd><dt class="param">maxPartitions</dt><dd class="cmt"><p>max number of partitions when saving
 </p></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -84,7 +84,7 @@ from Spark configuration.
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="com.granturing.spark.powerbi.ClientConf#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="&lt;init&gt;(token_uri:String,resource:String,uri:String,username:String,password:String,clientid:String,timeout:scala.concurrent.duration.Duration):com.granturing.spark.powerbi.ClientConf"></a>
+      <a id="&lt;init&gt;(token_uri:String,resource:String,uri:String,username:String,password:String,clientid:String,timeout:scala.concurrent.duration.Duration,maxPartitions:Int):com.granturing.spark.powerbi.ClientConf"></a>
       <a id="&lt;init&gt;:ClientConf"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -92,10 +92,10 @@ from Spark configuration.
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ClientConf</span><span class="params">(<span name="token_uri">token_uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="resource">resource: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="uri">uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="clientid">clientid: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeout">timeout: <span class="extype" name="scala.concurrent.duration.Duration">Duration</span></span>)</span>
+        <span class="name">ClientConf</span><span class="params">(<span name="token_uri">token_uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="resource">resource: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="uri">uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="clientid">clientid: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeout">timeout: <span class="extype" name="scala.concurrent.duration.Duration">Duration</span></span>, <span name="maxPartitions">maxPartitions: <span class="extype" name="scala.Int">Int</span></span>)</span>
       </span>
       </h4>
-      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">token_uri</dt><dd class="cmt"><p>the OAuth token URI to authenticate against</p></dd><dt class="param">resource</dt><dd class="cmt"><p>the OAuth resource to authenticate for</p></dd><dt class="param">uri</dt><dd class="cmt"><p>the PowerBI API URI</p></dd><dt class="param">username</dt><dd class="cmt"><p>the Azure Active Directory account name to authenticate with</p></dd><dt class="param">password</dt><dd class="cmt"><p>the Azure Active Directory account password to authenticate with</p></dd><dt class="param">clientid</dt><dd class="cmt"><p>the OAuth client id</p></dd><dt class="param">timeout</dt><dd class="cmt"><p>the response timeout in seconds for API calls
+      <p class="shortcomment cmt"></p><div class="fullcomment"><div class="comment cmt"></div><dl class="paramcmts block"><dt class="param">token_uri</dt><dd class="cmt"><p>the OAuth token URI to authenticate against</p></dd><dt class="param">resource</dt><dd class="cmt"><p>the OAuth resource to authenticate for</p></dd><dt class="param">uri</dt><dd class="cmt"><p>the PowerBI API URI</p></dd><dt class="param">username</dt><dd class="cmt"><p>the Azure Active Directory account name to authenticate with</p></dd><dt class="param">password</dt><dd class="cmt"><p>the Azure Active Directory account password to authenticate with</p></dd><dt class="param">clientid</dt><dd class="cmt"><p>the OAuth client id</p></dd><dt class="param">timeout</dt><dd class="cmt"><p>the response timeout in seconds for API calls</p></dd><dt class="param">maxPartitions</dt><dd class="cmt"><p>max number of partitions when saving
 </p></dd></dl></div>
     </li></ol>
             </div>
@@ -274,6 +274,20 @@ from Spark configuration.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="com.granturing.spark.powerbi.ClientConf#maxPartitions" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="maxPartitions:Int"></a>
+      <a id="maxPartitions:Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">maxPartitions</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">max number of partitions when saving
+</p>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -364,8 +378,7 @@ from Spark configuration.
         <span class="name">timeout</span><span class="result">: <span class="extype" name="scala.concurrent.duration.Duration">Duration</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">the response timeout in seconds for API calls
-</p>
+      <p class="shortcomment cmt">the response timeout in seconds for API calls</p>
     </li><li name="com.granturing.spark.powerbi.ClientConf#token_uri" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="token_uri:String"></a>
       <a id="token_uri:String"></a>
