@@ -13,16 +13,16 @@
  */
 package com.granturing.spark.powerbi
 
+import java.net.URLEncoder
 import java.text.SimpleDateFormat
 import java.util.concurrent.Executors
 import com.ning.http.client.{AsyncHttpClient, AsyncHttpClientConfig, Response}
 import dispatch._, Defaults._
-import org.apache.spark.{Logging, SparkConf}
+import org.apache.spark.Logging
 import org.json4s.JsonAST.JNull
 import org.json4s.jackson.JsonMethods._
 import org.json4s.{JValue, DefaultFormats}
 import org.json4s.jackson.Serialization._
-import scala.concurrent.duration._
 import scala.concurrent.Future
 
 case class Dataset(id: String, name: String)
@@ -75,7 +75,7 @@ class Client(conf: ClientConf) extends Logging {
     .setCompressionEnabled(true)
     .build()
 
-  @transient implicit lazy private val http = new Http(new AsyncHttpClient(httpConfig))
+  @transient lazy private val http = new Http(new AsyncHttpClient(httpConfig))
 
   private val token = new OAuthTokenHandler(conf)
 
@@ -147,7 +147,7 @@ class Client(conf: ClientConf) extends Logging {
   def addRows(dataset: String, table: String, rows: Seq[_]): Future[Unit] = {
     val body = write("rows" -> rows)
 
-    val add_req = url(conf.uri + "/datasets/" + dataset + "/tables/" + table + "/rows")
+    val add_req = url(conf.uri + "/datasets/" + dataset + "/tables/" + URLEncoder.encode(table, "UTF-8") + "/rows")
       .POST
       .setContentType("application/json", "UTF-8") <<
       body
@@ -165,7 +165,7 @@ class Client(conf: ClientConf) extends Logging {
    * @return a success or failure result
    */
   def clearTable(dataset: String, table: String): Future[Unit] = {
-    val add_req = url(conf.uri + "/datasets/" + dataset + "/tables/" + table + "/rows")
+    val add_req = url(conf.uri + "/datasets/" + dataset + "/tables/" + URLEncoder.encode(table, "UTF-8") + "/rows")
       .DELETE
 
     val request = http(oauth(add_req) > PowerBIResult)

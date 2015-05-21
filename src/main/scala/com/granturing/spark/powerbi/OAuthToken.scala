@@ -13,13 +13,11 @@
  */
 package com.granturing.spark.powerbi
 
-import dispatch._, Defaults._
+import java.util.concurrent.{ExecutionException, TimeUnit, Executors}
+import com.microsoft.aad.adal4j.AuthenticationContext
+import dispatch._
 import org.apache.spark.Logging
-import org.json4s._
-import org.json4s.DefaultFormats
-import org.json4s.jackson.JsonMethods._
-import scala.concurrent.Await
-import scala.util.{Failure, Success}
+import scala.util.{Try, Failure, Success}
 
 private class OAuthReq(token: OAuthTokenHandler) extends (Req => Req) {
 
@@ -29,8 +27,7 @@ private class OAuthReq(token: OAuthTokenHandler) extends (Req => Req) {
 
 }
 
-private class OAuthTokenHandler(authConf: ClientConf, initialToken: Option[String] = None)(implicit http: Http) extends Logging {
-  implicit private val formats = DefaultFormats
+private class OAuthTokenHandler(authConf: ClientConf, initialToken: Option[String] = None) extends Logging {
 
   private var _token: Option[String] = initialToken
 
@@ -49,37 +46,27 @@ private class OAuthTokenHandler(authConf: ClientConf, initialToken: Option[Strin
     }
   }
 
-  private def refreshToken = {
+  private def refreshToken: Try[String] = {
     log.info("refreshing OAuth token")
 
-    val token_req = url(authConf.token_uri) <<
-      Map("grant_type" -> "password",
-        "username" -> authConf.username,
-        "password" -> authConf.password,
-        "client_id" -> authConf.clientid,
-        "resource" -> authConf.resource)
+    val service = Executors.newFixedThreadPool(1);
+    val context = new AuthenticationContext(authConf.token_uri, true, service)
 
-    val request = http(token_req)
+    val future = context.acquireToken(authConf.resource, authConf.clientid, authConf.username, authConf.password, null)
 
-    val response = Await.result(request, authConf.timeout)
+    try {
+      val result = future.get(authConf.timeout.toSeconds, TimeUnit.SECONDS)
 
-    response.getStatusCode match {
-      case 200 => {
-        val token = (parse(response.getResponseBody) \ "access_token").extract[String]
+      log.info("OAuth token refresh successful")
 
-        log.info("token refresh successful")
-
-        Success(token)
-      }
-      case _ if s"${response.getContentType}".startsWith("application/json") && response.getResponseBody.size > 0 => {
-        val json = parse(response.getResponseBody)
-        val error = (json \ "error_description").extract[String]
-
-        Failure(new Exception(error))
-      }
-      case _ if response.getResponseBody.size == 0 => Failure(new Exception(response.getStatusText))
-      case _ => Failure(new Exception(response.getResponseBody))
+      Success(result.getAccessToken)
+    } catch {
+      case e: ExecutionException => Failure(e.getCause)
+      case t: Throwable => Failure(t)
+    } finally {
+      service.shutdown()
     }
+
   }
 
 }
