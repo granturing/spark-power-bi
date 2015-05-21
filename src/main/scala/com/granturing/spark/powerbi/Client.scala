@@ -33,7 +33,7 @@ case class Table(name: String, columns: Seq[Column])
 
 case class Schema(name: String, tables: Seq[Table])
 
-private object PowerBIResult extends (Response => JValue) {
+private[powerbi] object PowerBIResult extends (Response => JValue) {
 
   implicit private val formats = DefaultFormats
 
@@ -59,16 +59,15 @@ private object PowerBIResult extends (Response => JValue) {
  * @param conf a client configuration
  * @see [[com.granturing.spark.powerbi.ClientConf]]
  */
-class Client(conf: ClientConf) extends Logging {
+class Client(conf: ClientConf, initialToken: Option[String] = None) extends Logging {
 
-  // Not serializable so we make it transient and lazy
-  @transient lazy implicit private val formats = new DefaultFormats {
+  implicit private val formats = new DefaultFormats {
     override def dateFormatter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS")
   }
 
-  @transient lazy private val threadPool = Executors.newCachedThreadPool()
+  private val threadPool = Executors.newCachedThreadPool()
 
-  @transient lazy private val httpConfig = new AsyncHttpClientConfig.Builder()
+  private val httpConfig = new AsyncHttpClientConfig.Builder()
     .setExecutorService(threadPool)
     .setConnectionTimeoutInMs(conf.timeout.toMillis.toInt)
     .setRequestTimeoutInMs(conf.timeout.toMillis.toInt)
@@ -77,12 +76,19 @@ class Client(conf: ClientConf) extends Logging {
 
   @transient lazy private val http = new Http(new AsyncHttpClient(httpConfig))
 
-  private val token = new OAuthTokenHandler(conf)
+  private val token = new OAuthTokenHandler(conf, initialToken)
 
   private val oauth = new OAuthReq(token)
 
   /**
-   * Gets the current list of datasets for the current account.
+   * Gets the current OAuth token being used for authentication.
+   *
+   * @return an OAuth authorization token
+   */
+  def currentToken = token()
+
+  /**
+   * Gets a list of datasets for the current account.
    *
    * @return a list of datasets
    * @see [[com.granturing.spark.powerbi.Dataset]]
@@ -121,16 +127,37 @@ class Client(conf: ClientConf) extends Logging {
   }
 
   /**
-   * Deletes a dataset including all the tables and data
+   * Gets a list of tables for the specified dataset.
    *
    * @param dataset a dataset GUID
+   * @return a list of tables
+   */
+  def getTables(dataset: String): Future[Seq[String]] = {
+    val tables_req = url(conf.uri + "/datasets/" + dataset + "/tables")
+
+    val request = http(oauth(tables_req) > PowerBIResult)
+
+    val response = request map { json => (json \ "tables" \ "name").extract[Seq[String]] }
+
+    response
+  }
+
+  /**
+   * Updates the schema of an existing table
+   *
+   * @param dataset a dataset GUID
+   * @param table the table name which to update
    * @return a success or failure result
    */
-  def deleteDataset(dataset: String): Future[Unit] = {
-    val delete_req = url(conf.uri + "/datasets/" + dataset)
-      .DELETE
+  def updateTableSchema(dataset: String, table: String, schema: Table): Future[Unit] = {
+    val body = write(schema)
 
-    val request = http(oauth(delete_req) > PowerBIResult)
+    val add_req = url(conf.uri + "/datasets/" + dataset + "/tables/" + URLEncoder.encode(table, "UTF-8"))
+      .PUT
+      .setContentType("application/json", "UTF-8") <<
+      body
+
+    val request = http(oauth(add_req) > PowerBIResult)
 
     request.map(_ => ())
   }

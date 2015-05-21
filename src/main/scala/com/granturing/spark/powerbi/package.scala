@@ -31,11 +31,7 @@ package object powerbi {
    */
   private[powerbi] trait PowerBISink extends Serializable {
 
-    protected val conf: ClientConf
-
-    @transient protected lazy val client = new Client(conf)
-
-    protected def getOrCreateDataset[A <: Product: TypeTag](dataset: String, table: String, tag: TypeTag[A]) = {
+    protected def getOrCreateDataset[A <: Product: TypeTag](dataset: String, table: String, tag: TypeTag[A])(implicit client: Client) = {
       val result = promise[Dataset]
 
       client.getDatasets map { list =>
@@ -50,7 +46,7 @@ package object powerbi {
       result.future
     }
 
-    protected def getOrCreateDataset(dataset: String, table: String, schema: StructType) = {
+    protected def getOrCreateDataset(dataset: String, table: String, schema: StructType)(implicit client: Client) = {
       val result = promise[Dataset]
 
       client.getDatasets map { list =>
@@ -105,7 +101,9 @@ package object powerbi {
 
   implicit class PowerBIDStream[A <: Product: TypeTag](stream: DStream[A]) extends PowerBISink {
 
-    override val conf = ClientConf.fromSparkConf(stream.context.sparkContext.getConf)
+    val conf = ClientConf.fromSparkConf(stream.context.sparkContext.getConf)
+
+    implicit val client = new Client(conf)
 
     /**
      * Inserts data into a PowerBI table. If the dataset does not already exist it will be created
@@ -125,13 +123,17 @@ package object powerbi {
         }
       }, Duration.Inf) // have to await here otherwise Spark won't see the foreachRDD below
 
-      val clientConf = conf
+      // we need local copies, workaround for TypeTag serialization issue (see: https://issues.scala-lang.org/browse/SI-5919)
+      val _conf = conf
+      val _token = Some(client.currentToken)
       val _table = table
       val _batchSize = batchSize
 
-      stream foreachRDD {
-        _ foreachPartition { p =>
-          val _client = new Client(clientConf)
+      stream foreachRDD { rdd =>
+        val slim = rdd.coalesce(_conf.maxPartitions)
+
+        slim foreachPartition { p =>
+          val _client = new Client(_conf, _token)
           val rows = p.toSeq.sliding(_batchSize, _batchSize)
           for (batch <- rows) {
             Await.result(_client.addRows(ds.id, _table, batch), Duration.Inf)
@@ -144,7 +146,9 @@ package object powerbi {
 
   implicit class PowerBIRDD[A <: Product : TypeTag](rdd: RDD[A]) extends PowerBISink {
 
-    override val conf = ClientConf.fromSparkConf(rdd.sparkContext.getConf)
+    val conf = ClientConf.fromSparkConf(rdd.sparkContext.getConf)
+
+    implicit val client = new Client(conf)
 
     /**
      * Inserts data into a PowerBI table. If the dataset does not already exist it will be created
@@ -165,12 +169,14 @@ package object powerbi {
       }
 
       val result = ds map { d =>
-        val clientConf = conf
+        // we need local copies, workaround for TypeTag serialization issue (see: https://issues.scala-lang.org/browse/SI-5919)
+        val _conf = conf
+        val _token = Some(client.currentToken)
         val _table = table
         val _batchSize = batchSize
 
-        rdd foreachPartition { p =>
-          val _client = new Client(clientConf)
+        rdd coalesce(_conf.maxPartitions) foreachPartition { p =>
+          val _client = new Client(_conf, _token)
           val rows = p.toSeq.sliding(_batchSize, _batchSize)
           for (batch <- rows) {
             Await.result(_client.addRows(d.id, _table, batch), Duration.Inf)
@@ -186,7 +192,9 @@ package object powerbi {
 
   implicit class PowerBISchemaRDD(schemaRDD: SchemaRDD) extends PowerBISink {
 
-    override val conf = ClientConf.fromSparkConf(schemaRDD.sparkContext.getConf)
+    val conf = ClientConf.fromSparkConf(schemaRDD.sparkContext.getConf)
+
+    implicit val client = new Client(conf)
 
     /**
      * Inserts data into a PowerBI table. If the dataset does not already exist it will be created
@@ -209,12 +217,14 @@ package object powerbi {
       }
 
       val result = ds map { d =>
-        schemaRDD foreachPartition { p =>
+        val _token = Some(client.currentToken)
+
+        schemaRDD coalesce(conf.maxPartitions) foreachPartition { p =>
           val rows = p.map(r => {
             fields.map{ case(name, index) => (name -> r(index)) }.toMap
           }).toSeq.sliding(batchSize, batchSize)
 
-          val _client = new Client(conf)
+          val _client = new Client(conf, _token)
           for (batch <- rows) {
             Await.result(_client.addRows(d.id, table, batch), Duration.Inf)
           }

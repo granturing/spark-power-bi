@@ -28,8 +28,9 @@ import scala.concurrent.duration._
  * @param password the Azure Active Directory account password to authenticate with
  * @param clientid the OAuth client id
  * @param timeout the response timeout in seconds for API calls
+ * @param maxPartitions max number of partitions when saving
  */
-case class ClientConf(token_uri: String, resource: String, uri: String, username: String, password: String, clientid: String, timeout: Duration)
+case class ClientConf(token_uri: String, resource: String, uri: String, username: String, password: String, clientid: String, timeout: Duration, maxPartitions: Int)
 
 object ClientConf {
 
@@ -37,6 +38,7 @@ object ClientConf {
   val TOKEN_RESOURCE_DEFAULT = "https://analysis.windows.net/powerbi/api"
   val API_URI_DEFAULT = "https://api.powerbi.com/beta/myorg"
   val BATCH_SIZE = 10000
+  val MAX_PARTITIONS = 5
 
   /**
    * Generates a PowerBI client configuration for credentials, URIs, and OAuth client id.
@@ -57,6 +59,8 @@ object ClientConf {
    *
    * spark.powerbi.timeout - The response timeout in seconds for API calls (default: 30 seconds)
    *
+   * spark.powerbi.max_partitions - The max number of partitions when saving (default: 5)
+   *
    * @param conf a Spark configuration object with the application settings
    * @return a PowerBI client configuration
    */
@@ -68,7 +72,8 @@ object ClientConf {
     val password = conf.get("spark.powerbi.password")
     val clientid = conf.get("spark.powerbi.clientid")
     val timeout = Duration(conf.get("spark.powerbi.timeout", "30").toInt, SECONDS)
+    val maxPartitions = conf.get("spark.powerbi.max_partitions", MAX_PARTITIONS.toString).toInt
 
-    ClientConf(token, resource, api, username, password, clientid, timeout)
+    ClientConf(token, resource, api, username, password, clientid, timeout, maxPartitions)
   }
 }
