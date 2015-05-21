@@ -27,7 +27,7 @@ import scala.reflect.runtime.universe._
 package object powerbi {
 
   /**
-   * @define BATCH_SIZE 10000
+   * @define BATCHSIZE 10000
    */
   private[powerbi] trait PowerBISink extends Serializable {
 
@@ -113,7 +113,7 @@ package object powerbi {
      * @param dataset The dataset name in PowerBI
      * @param table The target table name
      * @param append Whether to append data or clear the table before inserting (default: true)
-     * @param batchSize Max number of records to submit in a batch (default: $BATCH_SIZE)
+     * @param batchSize Max number of records to submit in a batch (default: $BATCHSIZE)
      */
     def saveToPowerBI(dataset: String, table: String, append: Boolean = true, batchSize: Int = ClientConf.BATCH_SIZE): Unit = {
       val ds = Await.result(getOrCreateDataset(dataset, table, typeTag[A]) flatMap { d =>
@@ -158,7 +158,7 @@ package object powerbi {
      * @param dataset The dataset name in PowerBI
      * @param table The target table name
      * @param append Whether to append data or clear the table before inserting (default: true)
-     * @param batchSize Max number of records to submit in a batch (default: $BATCH_SIZE)
+     * @param batchSize Max number of records to submit in a batch (default: $BATCHSIZE)
      */
     def saveToPowerBI(dataset: String, table: String, append: Boolean = true, batchSize: Int = ClientConf.BATCH_SIZE): Unit = {
       val ds = getOrCreateDataset(dataset, table, typeTag[A]) flatMap { d=>
@@ -204,7 +204,7 @@ package object powerbi {
      * @param dataset The dataset name in PowerBI
      * @param table The target table name
      * @param append Whether to append data or clear the table before inserting (default: true)
-     * @param batchSize Max number of records to submit in a batch (default: $BATCH_SIZE)
+     * @param batchSize Max number of records to submit in a batch (default: $BATCHSIZE)
      */
     def saveToPowerBI(dataset: String, table: String, append: Boolean = true, batchSize: Int = ClientConf.BATCH_SIZE): Unit = {
       val fields = schemaRDD.schema.fieldNames.zipWithIndex
