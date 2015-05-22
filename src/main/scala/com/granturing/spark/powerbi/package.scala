@@ -15,13 +15,17 @@ package com.granturing.spark
 
 import java.util.Date
 import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.catalyst.types._
-import org.apache.spark.sql.{DataType, StructType, SchemaRDD}
+import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.types.BooleanType
+import org.apache.spark.sql.types.DateType
+import org.apache.spark.sql.types.StringType
+import org.apache.spark.sql.types.TimestampType
+import org.apache.spark.sql.types.{DataType, StructType}
 import org.apache.spark.streaming.dstream.DStream
-import scala.concurrent.Await
+import scala.concurrent.{Future, Await, future, promise}
 import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.duration._
-import scala.concurrent.{ future, promise }
 import scala.reflect.runtime.universe._
 
 package object powerbi {
@@ -31,7 +35,7 @@ package object powerbi {
    */
   private[powerbi] trait PowerBISink extends Serializable {
 
-    protected def getOrCreateDataset[A <: Product: TypeTag](dataset: String, table: String, tag: TypeTag[A])(implicit client: Client) = {
+    protected def getOrCreateDataset[A <: Product: TypeTag](dataset: String, table: String, tag: TypeTag[A])(implicit client: Client): Future[Dataset] = {
       val result = promise[Dataset]
 
       client.getDatasets map { list =>
@@ -46,7 +50,7 @@ package object powerbi {
       result.future
     }
 
-    protected def getOrCreateDataset(dataset: String, table: String, schema: StructType)(implicit client: Client) = {
+    protected def getOrCreateDataset(dataset: String, table: String, schema: StructType)(implicit client: Client): Future[Dataset] = {
       val result = promise[Dataset]
 
       client.getDatasets map { list =>
@@ -75,8 +79,9 @@ package object powerbi {
     }
 
     protected def sparkTypeToBIType(myType: DataType) = myType match {
-      case _: IntegralType => "Int64"
-      case _: FractionalType => "Double"
+      case ByteType | ShortType | IntegerType | LongType => "Int64"
+      case FloatType | DoubleType => "Double"
+      case _: DecimalType => "Double"
       case StringType => "String"
       case BooleanType => "Boolean"
       case TimestampType | DateType => "Datetime"
@@ -190,9 +195,9 @@ package object powerbi {
 
   }
 
-  implicit class PowerBISchemaRDD(schemaRDD: SchemaRDD) extends PowerBISink {
+  implicit class PowerBIDF(df: DataFrame) extends PowerBISink {
 
-    val conf = ClientConf.fromSparkConf(schemaRDD.sparkContext.getConf)
+    val conf = ClientConf.fromSparkConf(df.sqlContext.sparkContext.getConf)
 
     implicit val client = new Client(conf)
 
@@ -207,9 +212,7 @@ package object powerbi {
      * @param batchSize Max number of records to submit in a batch (default: $BATCHSIZE)
      */
     def saveToPowerBI(dataset: String, table: String, append: Boolean = true, batchSize: Int = ClientConf.BATCH_SIZE): Unit = {
-      val fields = schemaRDD.schema.fieldNames.zipWithIndex
-
-      val ds = getOrCreateDataset(dataset, table, schemaRDD.schema) flatMap { d =>
+      val ds = getOrCreateDataset(dataset, table, df.schema) flatMap { d =>
         append match {
           case true => future(d)
           case false => client.clearTable(d.id, table) map { _ => d}
@@ -217,16 +220,20 @@ package object powerbi {
       }
 
       val result = ds map { d =>
+        val fields = df.schema.fieldNames.zipWithIndex
+        val _conf = conf
         val _token = Some(client.currentToken)
+        val _table = table
+        val _batchSize = batchSize
 
-        schemaRDD coalesce(conf.maxPartitions) foreachPartition { p =>
+        df.rdd coalesce(_conf.maxPartitions) foreachPartition { p =>
           val rows = p.map(r => {
             fields.map{ case(name, index) => (name -> r(index)) }.toMap
-          }).toSeq.sliding(batchSize, batchSize)
+          }).toSeq.sliding(_batchSize, _batchSize)
 
-          val _client = new Client(conf, _token)
+          val _client = new Client(_conf, _token)
           for (batch <- rows) {
-            Await.result(_client.addRows(d.id, table, batch), Duration.Inf)
+            Await.result(_client.addRows(d.id, _table, batch), Duration.Inf)
           }
           _client.shutdown()
         }

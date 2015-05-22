@@ -4,11 +4,11 @@ organization := "com.granturing"
 
 publishMavenStyle := true
 
-version := "1.2.0_0.0.2"
+version := "1.3.0_0.0.3"
 
 scalaVersion := "2.10.4"
 
-sparkVersion := "1.2.0"
+sparkVersion := "1.3.0"
 
 sparkComponents ++= Seq("core", "streaming", "sql")
 

@@ -1,6 +1,6 @@
 package com.granturing.spark.powerbi
 
-import org.apache.log4j.{Level, Logger}
+import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkContext, SparkConf}
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, FunSuite}
 import scala.concurrent.Await
