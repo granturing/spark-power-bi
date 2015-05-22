@@ -84,7 +84,7 @@ ssc.awaitTermination()
 ## Referencing As A Dependency
 With Spark 1.3 you can now easily reference dependencies using the `--packages` argument:
 ```bash
-spark-shell --package com.granturing:spark-power-bi:1.3.0_0.0.3
+spark-shell --package com.granturing:spark-power-bi_2.10:1.3.0_0.0.3
 ```
 
 ## Building From Source
