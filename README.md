@@ -81,5 +81,11 @@ ssc.start()
 ssc.awaitTermination()
 ```
 
+## Referencing As A Dependency
+With Spark 1.3 you can now easily reference dependencies using the `--packages` argument:
+```bash
+spark-shell --package com.granturing:spark-powerbi:1.3.0_0.0.3
+```
+
 ## Building From Source
-The library uses SBT and can easily be built by running ```sbt package``` to generate a JAR file or ```sbt assembly``` to generate an assembly JAR with necessary dependencies.
+The library uses SBT and can easily be built by running ```sbt package```.
