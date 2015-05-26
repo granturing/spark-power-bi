@@ -62,7 +62,7 @@ private[powerbi] object PowerBIResult extends (Response => JValue) {
 class Client(conf: ClientConf, initialToken: Option[String] = None) extends Logging {
 
   implicit private val formats = new DefaultFormats {
-    override def dateFormatter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS")
+    override def dateFormatter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
   }
 
   private val threadPool = Executors.newCachedThreadPool()
