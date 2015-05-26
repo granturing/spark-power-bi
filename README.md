@@ -2,7 +2,7 @@
 A library for pushing data from Spark, SparkSQL, or Spark Streaming to [Power BI](https://powerbi.com/).
 
 ## Requirements
-This library is built for Spark 1.2 and 1.3. The versions of the library match to the Spark version. So v1.2.0_0.0.2 is for Spark 1.2 & v1.3.0_0.0.4 is for Spark 1.3.
+This library is built for Spark 1.2 and 1.3. The versions of the library match to the Spark version. So v1.2.0_0.0.2 is for Spark 1.2 & v1.3.0_0.0.5 is for Spark 1.3.
 
 ## Power BI API
 NOTE: The Power BI API is still in preview so this library will change as new features are added. Additional details are available in the [developer center](https://msdn.microsoft.com/en-us/library/dn877544.aspx). Authentication is handled via OAuth2 with your Azure AD credentials specified via Spark properties. More details on registering an app and authenticating are available in the Power BI dev center. When pushing rows to Power BI the library will create the target dataset with table if necessary. The current Power BI service is limited to 10,000 rows per call so the library handles batching internally. The service also limits to no more than 5 concurrent calls at a time when adding rows. This is handled by the library using coalesce and can be tuned by with the `spark.powerbi.max_partitions` property.
@@ -84,7 +84,7 @@ ssc.awaitTermination()
 ## Referencing As A Dependency
 With Spark 1.3 you can now easily reference dependencies using the `--packages` argument:
 ```bash
-spark-shell --package com.granturing:spark-power-bi_2.10:1.3.0_0.0.4
+spark-shell --package com.granturing:spark-power-bi_2.10:1.3.0_0.0.5
 ```
 
 ## Building From Source

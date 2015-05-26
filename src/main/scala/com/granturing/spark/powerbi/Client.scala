@@ -19,9 +19,9 @@ import java.util.concurrent.Executors
 import com.ning.http.client.{AsyncHttpClient, AsyncHttpClientConfig, Response}
 import dispatch._, Defaults._
 import org.apache.spark.Logging
-import org.json4s.JsonAST.JNull
+import org.json4s.JsonAST.{JString, JNull}
 import org.json4s.jackson.JsonMethods._
-import org.json4s.{JValue, DefaultFormats}
+import org.json4s.{NoTypeHints, CustomSerializer, JValue, DefaultFormats}
 import org.json4s.jackson.Serialization._
 import scala.concurrent.Future
 
@@ -52,6 +52,16 @@ private[powerbi] object PowerBIResult extends (Response => JValue) {
   }
 }
 
+private class JavaSqlDateSerializer extends CustomSerializer[java.sql.Date](format => (
+  null, {
+  case x: java.sql.Date => JString(format.dateFormat.format(x))
+}))
+
+private class JavaSqlTimestampSerializer extends CustomSerializer[java.sql.Timestamp](format => (
+  null, {
+  case x: java.sql.Timestamp => JString(format.dateFormat.format(x))
+}))
+
 /**
  * A very basic PowerBI client using the Scala Dispatch HTTP library. Requires that an app be registered
  * in your Azure Active Directory to allow access to your PowerBI service.
@@ -63,7 +73,9 @@ class Client(conf: ClientConf, initialToken: Option[String] = None) extends Logg
 
   implicit private val formats = new DefaultFormats {
     override def dateFormatter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-  }
+
+    override val typeHints = NoTypeHints
+  } ++ Seq(new JavaSqlDateSerializer, new JavaSqlTimestampSerializer)
 
   private val threadPool = Executors.newCachedThreadPool()
 
