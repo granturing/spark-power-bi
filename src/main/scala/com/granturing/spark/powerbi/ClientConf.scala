@@ -39,9 +39,10 @@ object ClientConf {
   val API_URI_DEFAULT = "https://api.powerbi.com/beta/myorg"
   val BATCH_SIZE = 10000
   val MAX_PARTITIONS = 5
-  val POWERBI_USERNAME = "POWERBI_USERNAME"
-  val POWERBI_PASSWORD = "POWERBI_PASSWORD"
-  val POWERBI_CLIENTID = "POWERBI_CLIENTID"
+
+  private val POWERBI_USERNAME = "POWERBI_USERNAME"
+  private val POWERBI_PASSWORD = "POWERBI_PASSWORD"
+  private val POWERBI_CLIENTID = "POWERBI_CLIENTID"
 
   /**
    * Generates a PowerBI client configuration for credentials, URIs, and OAuth client id.
