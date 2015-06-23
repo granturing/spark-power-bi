@@ -39,6 +39,9 @@ object ClientConf {
   val API_URI_DEFAULT = "https://api.powerbi.com/beta/myorg"
   val BATCH_SIZE = 10000
   val MAX_PARTITIONS = 5
+  val POWERBI_USERNAME = "POWERBI_USERNAME"
+  val POWERBI_PASSWORD = "POWERBI_PASSWORD"
+  val POWERBI_CLIENTID = "POWERBI_CLIENTID"
 
   /**
    * Generates a PowerBI client configuration for credentials, URIs, and OAuth client id.
@@ -68,9 +71,9 @@ object ClientConf {
     val token = conf.get("spark.powerbi.token.uri", TOKEN_URI_DEFAULT)
     val resource = conf.get("spark.powerbi.token.resource", TOKEN_RESOURCE_DEFAULT)
     val api = conf.get("spark.powerbi.uri", API_URI_DEFAULT)
-    val username = conf.get("spark.powerbi.username")
-    val password = conf.get("spark.powerbi.password")
-    val clientid = conf.get("spark.powerbi.clientid")
+    val username = sys.env.getOrElse(POWERBI_USERNAME, conf.get("spark.powerbi.username"))
+    val password = sys.env.getOrElse(POWERBI_PASSWORD, conf.get("spark.powerbi.password"))
+    val clientid = sys.env.getOrElse(POWERBI_CLIENTID, conf.get("spark.powerbi.clientid"))
     val timeout = Duration(conf.get("spark.powerbi.timeout", "30").toInt, SECONDS)
     val maxPartitions = conf.get("spark.powerbi.max_partitions", MAX_PARTITIONS.toString).toInt
 
