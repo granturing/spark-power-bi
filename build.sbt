@@ -4,9 +4,9 @@ organization := "com.granturing"
 
 publishMavenStyle := true
 
-version := "1.4.0_0.0.6"
+version := "1.4.0_0.0.7"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.10.5"
 
 sparkVersion := "1.4.0"
 

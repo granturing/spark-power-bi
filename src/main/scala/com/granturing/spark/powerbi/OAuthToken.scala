@@ -14,9 +14,10 @@
 package com.granturing.spark.powerbi
 
 import java.util.concurrent.{ExecutionException, TimeUnit, Executors}
-import com.microsoft.aad.adal4j.AuthenticationContext
+import com.microsoft.aad.adal4j.{AuthenticationResult, AuthenticationCallback, AuthenticationContext}
 import dispatch._
 import org.apache.spark.Logging
+import scala.concurrent.{Await, promise}
 import scala.util.{Try, Failure, Success}
 
 private class OAuthReq(token: OAuthTokenHandler) extends (Req => Req) {
@@ -52,10 +53,21 @@ private class OAuthTokenHandler(authConf: ClientConf, initialToken: Option[Strin
     val service = Executors.newFixedThreadPool(1);
     val context = new AuthenticationContext(authConf.token_uri, true, service)
 
-    val future = context.acquireToken(authConf.resource, authConf.clientid, authConf.username, authConf.password, null)
+    val p = promise[AuthenticationResult]
+    val future = p.future
+
+    context.acquireToken(authConf.resource, authConf.clientid, authConf.username, authConf.password, new AuthenticationCallback {
+      def onSuccess(result: AuthenticationResult): Unit = {
+        p.success(result)
+      }
+
+      def onFailure(ex: Throwable): Unit = {
+        p.failure(ex)
+      }
+    })
 
     try {
-      val result = future.get(authConf.timeout.toSeconds, TimeUnit.SECONDS)
+      val result = Await.result(future, authConf.timeout)
 
       log.info("OAuth token refresh successful")
 

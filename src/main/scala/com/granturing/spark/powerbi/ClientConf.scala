@@ -30,13 +30,23 @@ import scala.concurrent.duration._
  * @param timeout the response timeout in seconds for API calls
  * @param maxPartitions max number of partitions when saving
  */
-case class ClientConf(token_uri: String, resource: String, uri: String, username: String, password: String, clientid: String, timeout: Duration, maxPartitions: Int)
+case class ClientConf(
+  token_uri: String,
+  resource: String,
+  uri: String,
+  username: String,
+  password: String,
+  clientid: String,
+  timeout: Duration,
+  maxPartitions: Int,
+  batchSize: Int
+)
 
 object ClientConf {
 
   val TOKEN_URI_DEFAULT = "https://login.windows.net/common/oauth2/token"
   val TOKEN_RESOURCE_DEFAULT = "https://analysis.windows.net/powerbi/api"
-  val API_URI_DEFAULT = "https://api.powerbi.com/beta/myorg"
+  val API_URI_DEFAULT = "https://api.powerbi.com/v1.0/myorg"
   val BATCH_SIZE = 10000
   val MAX_PARTITIONS = 5
 
@@ -77,7 +87,8 @@ object ClientConf {
     val clientid = sys.env.getOrElse(POWERBI_CLIENTID, conf.get("spark.powerbi.clientid"))
     val timeout = Duration(conf.get("spark.powerbi.timeout", "30").toInt, SECONDS)
     val maxPartitions = conf.get("spark.powerbi.max_partitions", MAX_PARTITIONS.toString).toInt
+    val batchSize = conf.get("spark.powerbi.batch_size", BATCH_SIZE.toString).toInt
 
-    ClientConf(token, resource, api, username, password, clientid, timeout, maxPartitions)
+    ClientConf(token, resource, api, username, password, clientid, timeout, maxPartitions, batchSize)
   }
 }

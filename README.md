@@ -2,10 +2,10 @@
 A library for pushing data from Spark, SparkSQL, or Spark Streaming to [Power BI](https://powerbi.com/).
 
 ## Requirements
-This library is built for Spark 1.2, 1.3, & 1.4. The versions of the library match to the Spark version. So v1.2.0_0.0.2 is for Spark 1.2, & v1.3.0_0.0.5 is for Spark 1.3, and v1.4.0_0.0.5 is for Spark 1.4.
+This library is built for Spark 1.2, 1.3, & 1.4. The versions of the library match to the Spark version. So v1.2.0_0.0.2 is for Spark 1.2, & v1.3.0_0.0.5 is for Spark 1.3, and v1.4.0_0.0.7 is for Spark 1.4.
 
 ## Power BI API
-NOTE: The Power BI API is still in preview so this library will change as new features are added. Additional details are available in the [developer center](https://msdn.microsoft.com/en-us/library/dn877544.aspx). Authentication is handled via OAuth2 with your Azure AD credentials specified via Spark properties. More details on registering an app and authenticating are available in the Power BI dev center. When pushing rows to Power BI the library will create the target dataset with table if necessary. The current Power BI service is limited to 10,000 rows per call so the library handles batching internally. The service also limits to no more than 5 concurrent calls at a time when adding rows. This is handled by the library using coalesce and can be tuned by with the `spark.powerbi.max_partitions` property.
+Additional details regarding the Power BI API are available in the [developer center](https://msdn.microsoft.com/en-us/library/dn877544.aspx). Authentication is handled via OAuth2 with your Azure AD credentials specified via Spark properties. More details on registering an app and authenticating are available in the Power BI dev center. When pushing rows to Power BI the library will create the target dataset with table if necessary. The current Power BI service is limited to 10,000 rows per call so the library handles batching internally. The service also limits to no more than 5 concurrent calls at a time when adding rows. This is handled by the library using coalesce and can be tuned by with the `spark.powerbi.max_partitions` property.
 
 ## Scaladoc
 Scaladoc is available [here](http://granturing.github.io/spark-power-bi/docs)
@@ -18,7 +18,7 @@ spark.powerbi.password
 spark.powerbi.clientid
 ```
 
-Rather than using your personal AD credentials for publishing data, you may want to create a service account instead. Then you can logon to Power BI using that account and share the data sets and dashboards with other users in your organization. Unfortunately, there's currently no other way of authenticating to Power BI. Hopefully in the future there'll be an organization-level API token that can publish shared data sets, without having to use an actual AD account.
+Rather than using your personal AD credentials for publishing data, you may want to create a service account instead. Then you can logon to Power BI using that account and share the data sets and dashboards with other users in your organization. Unfortunately, there's currently no other way of authenticating to Power BI. Hopefully in the future there'll be an organization-level API token that can publish shared data sets, without having to use an actual AD account. You can also use a Power BI group when publishing data.
 
 ### Setting Up Azure Active Directory
 You'll need to create an application within your Azure AD in order to have a client id to publish data sets.
@@ -59,7 +59,7 @@ import org.apache.spark.sql._
 val sqlCtx = new SQLContext(sc)
 val people = sqlCtx.jsonFile("examples/src/main/resources/people.json")
 
-people.saveToPowerBI("Test", "People")
+people.write.format("com.granturing.spark.powerbi").options(Map("dataset" -> "Test", "table" -> "People")).save
 ```
 
 ## Spark Streaming
@@ -84,8 +84,8 @@ ssc.awaitTermination()
 ## Referencing As A Dependency
 You can also easily reference dependencies using the `--packages` argument:
 ```bash
-spark-shell --package com.granturing:spark-power-bi_2.10:1.4.0_0.0.5
+spark-shell --package com.granturing:spark-power-bi_2.10:1.4.0_0.0.7
 ```
 
 ## Building From Source
-The library uses SBT and can easily be built by running ```sbt package```.
+The library uses SBT and can be built by running ```sbt package```.
