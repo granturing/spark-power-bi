@@ -1,3 +1,5 @@
+![build](https://travis-ci.org/granturing/spark-power-bi.svg)
+
 # spark-power-bi
 A library for pushing data from Spark, SparkSQL, or Spark Streaming to [Power BI](https://powerbi.com/).
 
