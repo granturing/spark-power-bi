@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>PowerBIRDD - com.granturing.spark.powerbi.PowerBIRDD</title>
-          <meta name="description" content="PowerBIRDD - com.granturing.spark.powerbi.PowerBIRDD" />
-          <meta name="keywords" content="PowerBIRDD com.granturing.spark.powerbi.PowerBIRDD" />
+          <title>DefaultSource - com.granturing.spark.powerbi.DefaultSource</title>
+          <meta name="description" content="DefaultSource - com.granturing.spark.powerbi.DefaultSource" />
+          <meta name="keywords" content="DefaultSource com.granturing.spark.powerbi.DefaultSource" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../index.html';
-            var hash = 'com.granturing.spark.powerbi.package$$PowerBIRDD';
+            var hash = 'com.granturing.spark.powerbi.DefaultSource';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,22 +26,22 @@
       <div id="definition">
         <img src="../../../../lib/class_big.png" />
         <p id="owner"><a href="../../../package.html" class="extype" name="com">com</a>.<a href="../../package.html" class="extype" name="com.granturing">granturing</a>.<a href="../package.html" class="extype" name="com.granturing.spark">spark</a>.<a href="package.html" class="extype" name="com.granturing.spark.powerbi">powerbi</a></p>
-        <h1>PowerBIRDD</h1>
+        <h1>DefaultSource</h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier">implicit </span>
+        <span class="modifier"></span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">PowerBIRDD</span><span class="tparams">[<span name="A">A &lt;: <span class="extype" name="scala.Product">Product</span></span>]</span><span class="result"> extends <span class="extype" name="com.granturing.spark.powerbi.PowerBISink">PowerBISink</span></span>
+        <span class="name">DefaultSource</span><span class="result"> extends <span class="extype" name="org.apache.spark.sql.sources.CreatableRelationProvider">CreatableRelationProvider</span> with <span class="extype" name="com.granturing.spark.powerbi.PowerBISink">PowerBISink</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="com.granturing.spark.powerbi.PowerBISink">PowerBISink</span>, <span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="com.granturing.spark.powerbi.PowerBISink">PowerBISink</span>, <span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="org.apache.spark.sql.sources.CreatableRelationProvider">CreatableRelationProvider</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -59,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="com.granturing.spark.powerbi.PowerBIRDD"><span>PowerBIRDD</span></li><li class="in" name="com.granturing.spark.powerbi.PowerBISink"><span>PowerBISink</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="com.granturing.spark.powerbi.DefaultSource"><span>DefaultSource</span></li><li class="in" name="com.granturing.spark.powerbi.PowerBISink"><span>PowerBISink</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="org.apache.spark.sql.sources.CreatableRelationProvider"><span>CreatableRelationProvider</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -79,16 +79,16 @@
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="com.granturing.spark.powerbi.PowerBIRDD#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(rdd:org.apache.spark.rdd.RDD[A])(implicitevidence$4:reflect.runtime.universe.TypeTag[A]):com.granturing.spark.powerbi.package.PowerBIRDD[A]"></a>
-      <a id="&lt;init&gt;:PowerBIRDD[A]"></a>
+              <ol><li name="com.granturing.spark.powerbi.DefaultSource#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;():com.granturing.spark.powerbi.DefaultSource"></a>
+      <a id="&lt;init&gt;:DefaultSource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">PowerBIRDD</span><span class="params">(<span name="rdd">rdd: <span class="extype" name="org.apache.spark.rdd.RDD">RDD</span>[<span class="extype" name="com.granturing.spark.powerbi.PowerBIRDD.A">A</span>]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="scala.reflect.api.TypeTags.TypeTag">scala.reflect.api.JavaUniverse.TypeTag</span>[<span class="extype" name="com.granturing.spark.powerbi.PowerBIRDD.A">A</span>]</span>)</span>
+        <span class="name">DefaultSource</span><span class="params">()</span>
       </span>
       </h4>
       
@@ -198,6 +198,19 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="com.granturing.spark.powerbi.DefaultSource#createRelation" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="createRelation(sqlContext:org.apache.spark.sql.SQLContext,mode:org.apache.spark.sql.SaveMode,parameters:Map[String,String],data:org.apache.spark.sql.DataFrame):org.apache.spark.sql.sources.BaseRelation"></a>
+      <a id="createRelation(SQLContext,SaveMode,Map[String,String],DataFrame):BaseRelation"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">createRelation</span><span class="params">(<span name="sqlContext">sqlContext: <span class="extype" name="org.apache.spark.sql.SQLContext">SQLContext</span></span>, <span name="mode">mode: <span class="extype" name="org.apache.spark.sql.SaveMode">SaveMode</span></span>, <span name="parameters">parameters: <span class="extype" name="scala.Predef.Map">Map</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Predef.String">String</span>]</span>, <span name="data">data: <span class="extype" name="org.apache.spark.sql.DataFrame">DataFrame</span></span>)</span><span class="result">: <span class="extype" name="org.apache.spark.sql.sources.BaseRelation">BaseRelation</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="com.granturing.spark.powerbi.DefaultSource">DefaultSource</a> → CreatableRelationProvider</dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -360,23 +373,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="com.granturing.spark.powerbi.PowerBIRDD#saveToPowerBI" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="saveToPowerBI(dataset:String,table:String,append:Boolean,group:Option[String]):Unit"></a>
-      <a id="saveToPowerBI(String,String,Boolean,Option[String]):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">saveToPowerBI</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="append">append: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="group">group: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Inserts data into a PowerBI table.</p><div class="fullcomment"><div class="comment cmt"><p>Inserts data into a PowerBI table. If the dataset does not already exist it will be created
-along with the specified table and schema based on the incoming data. Optionally clears existing
-data in the table.
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>The dataset name in PowerBI</p></dd><dt class="param">table</dt><dd class="cmt"><p>The target table name</p></dd><dt class="param">append</dt><dd class="cmt"><p>Whether to append data or clear the table before inserting (default: true)</p></dd><dt class="param">group</dt><dd class="cmt"><p>Power BI group to use when performing operations (default: None)
-</p></dd></dl></div>
     </li><li name="com.granturing.spark.powerbi.PowerBISink#schemaFor" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="schemaFor(schema:org.apache.spark.sql.types.StructType):Array[com.granturing.spark.powerbi.Column]"></a>
       <a id="schemaFor(StructType):Array[Column]"></a>
@@ -527,6 +523,8 @@ data in the table.
               <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
             </div><div class="parent" name="java.io.Serializable">
               <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="org.apache.spark.sql.sources.CreatableRelationProvider">
+              <h3>Inherited from <span class="extype" name="org.apache.spark.sql.sources.CreatableRelationProvider">CreatableRelationProvider</span></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">

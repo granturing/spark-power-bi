@@ -170,20 +170,20 @@ in your Azure Active Directory to allow access to your PowerBI service.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="com.granturing.spark.powerbi.Client#addRows" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addRows(dataset:String,table:String,rows:Seq[_]):scala.concurrent.Future[Unit]"></a>
-      <a id="addRows(String,String,Seq[_]):Future[Unit]"></a>
+      <a id="addRows(dataset:String,table:String,rows:Seq[_],group:Option[String]):scala.concurrent.Future[Unit]"></a>
+      <a id="addRows(String,String,Seq[_],Option[String]):Future[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addRows</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="rows">rows: <span class="extype" name="scala.Seq">Seq</span>[_]</span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">addRows</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="rows">rows: <span class="extype" name="scala.Seq">Seq</span>[_]</span>, <span name="group">group: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Adds a collection of rows to the specified dataset and table.</p><div class="fullcomment"><div class="comment cmt"><p>Adds a collection of rows to the specified dataset and table. If the dataset or table
 do not exist an error will be returned.
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt class="param">table</dt><dd class="cmt"><p>a table name within the dataset</p></dd><dt class="param">rows</dt><dd class="cmt"><p>a sequence of JSON serializable objects with property names matching the schema</p></dd><dt>returns</dt><dd class="cmt"><p>a success or failure result
+</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt class="param">table</dt><dd class="cmt"><p>a table name within the dataset</p></dd><dt class="param">rows</dt><dd class="cmt"><p>a sequence of JSON serializable objects with property names matching the schema</p></dd><dt class="param">group</dt><dd class="cmt"><p>optional id of group</p></dd><dt>returns</dt><dd class="cmt"><p>a success or failure result
 </p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -199,19 +199,19 @@ do not exist an error will be returned.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="com.granturing.spark.powerbi.Client#clearTable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="clearTable(dataset:String,table:String):scala.concurrent.Future[Unit]"></a>
-      <a id="clearTable(String,String):Future[Unit]"></a>
+      <a id="clearTable(dataset:String,table:String,group:Option[String]):scala.concurrent.Future[Unit]"></a>
+      <a id="clearTable(String,String,Option[String]):Future[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">clearTable</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">clearTable</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="group">group: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Clears all rows in the specified table.</p><div class="fullcomment"><div class="comment cmt"><p>Clears all rows in the specified table.
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt class="param">table</dt><dd class="cmt"><p>a table name within the dataset</p></dd><dt>returns</dt><dd class="cmt"><p>a success or failure result
+</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt class="param">table</dt><dd class="cmt"><p>a table name within the dataset</p></dd><dt class="param">group</dt><dd class="cmt"><p>optional id of group</p></dd><dt>returns</dt><dd class="cmt"><p>a success or failure result
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -233,20 +233,20 @@ do not exist an error will be returned.
               
         </dd></dl></div>
     </li><li name="com.granturing.spark.powerbi.Client#createDataset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="createDataset(schema:com.granturing.spark.powerbi.Schema):scala.concurrent.Future[com.granturing.spark.powerbi.Dataset]"></a>
-      <a id="createDataset(Schema):Future[Dataset]"></a>
+      <a id="createDataset(schema:com.granturing.spark.powerbi.Schema,group:Option[String],retentionPolicy:com.granturing.spark.powerbi.RetentionPolicy.EnumVal):scala.concurrent.Future[com.granturing.spark.powerbi.Dataset]"></a>
+      <a id="createDataset(Schema,Option[String],EnumVal):Future[Dataset]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">createDataset</span><span class="params">(<span name="schema">schema: <a href="Schema.html" class="extype" name="com.granturing.spark.powerbi.Schema">Schema</a></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">Dataset</a>]</span>
+        <span class="name">createDataset</span><span class="params">(<span name="schema">schema: <a href="Schema.html" class="extype" name="com.granturing.spark.powerbi.Schema">Schema</a></span>, <span name="group">group: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>, <span name="retentionPolicy">retentionPolicy: <a href="RetentionPolicy$$EnumVal.html" class="extype" name="com.granturing.spark.powerbi.RetentionPolicy.EnumVal">EnumVal</a> = <span class="symbol"><span class="name"><a href="RetentionPolicy$.html">RetentionPolicy.None</a></span></span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">Dataset</a>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new dataset with the specified schema
 </p><div class="fullcomment"><div class="comment cmt"><p>Creates a new dataset with the specified schema
-</p></div><dl class="paramcmts block"><dt class="param">schema</dt><dd class="cmt"><p>a schema for the new dataset</p></dd><dt>returns</dt><dd class="cmt"><p>a dataset object for the newly created dataset</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">com.granturing.spark.powerbi.Dataset</a>
+</p></div><dl class="paramcmts block"><dt class="param">schema</dt><dd class="cmt"><p>a schema for the new dataset</p></dd><dt class="param">group</dt><dd class="cmt"><p>optional id of group</p></dd><dt class="param">retentionPolicy</dt><dd class="cmt"><p>data retention policy to use for dataset</p></dd><dt>returns</dt><dd class="cmt"><p>a dataset object for the newly created dataset</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">com.granturing.spark.powerbi.Dataset</a>
 </p></span><span class="cmt"><p><a href="Schema.html" class="extype" name="com.granturing.spark.powerbi.Schema">com.granturing.spark.powerbi.Schema</a></p></span></dd></dl></div>
     </li><li name="com.granturing.spark.powerbi.Client#currentToken" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="currentToken:String"></a>
@@ -322,34 +322,47 @@ do not exist an error will be returned.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="com.granturing.spark.powerbi.Client#getDatasets" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getDatasets:scala.concurrent.Future[List[com.granturing.spark.powerbi.Dataset]]"></a>
-      <a id="getDatasets:Future[List[Dataset]]"></a>
+      <a id="getDatasets(group:Option[String]):scala.concurrent.Future[List[com.granturing.spark.powerbi.Dataset]]"></a>
+      <a id="getDatasets(Option[String]):Future[List[Dataset]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getDatasets</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.List">List</span>[<a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">Dataset</a>]]</span>
+        <span class="name">getDatasets</span><span class="params">(<span name="group">group: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.List">List</span>[<a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">Dataset</a>]]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Gets a list of datasets for the current account.</p><div class="fullcomment"><div class="comment cmt"><p>Gets a list of datasets for the current account.
-</p></div><dl class="paramcmts block"><dt>returns</dt><dd class="cmt"><p>a list of datasets</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">com.granturing.spark.powerbi.Dataset</a>
+</p></div><dl class="paramcmts block"><dt class="param">group</dt><dd class="cmt"><p>optional id of group</p></dd><dt>returns</dt><dd class="cmt"><p>a list of datasets</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="Dataset.html" class="extype" name="com.granturing.spark.powerbi.Dataset">com.granturing.spark.powerbi.Dataset</a>
 </p></span></dd></dl></div>
-    </li><li name="com.granturing.spark.powerbi.Client#getTables" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="getTables(dataset:String):scala.concurrent.Future[Seq[String]]"></a>
-      <a id="getTables(String):Future[Seq[String]]"></a>
+    </li><li name="com.granturing.spark.powerbi.Client#getGroups" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getGroups:scala.concurrent.Future[List[com.granturing.spark.powerbi.Group]]"></a>
+      <a id="getGroups:Future[List[Group]]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getTables</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
+        <span class="name">getGroups</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.List">List</span>[<a href="Group.html" class="extype" name="com.granturing.spark.powerbi.Group">Group</a>]]</span>
+      </span>
+      </h4>
+      
+    </li><li name="com.granturing.spark.powerbi.Client#getTables" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getTables(dataset:String,group:Option[String]):scala.concurrent.Future[Seq[String]]"></a>
+      <a id="getTables(String,Option[String]):Future[Seq[String]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getTables</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="group">group: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Seq">Seq</span>[<span class="extype" name="scala.Predef.String">String</span>]]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Gets a list of tables for the specified dataset.</p><div class="fullcomment"><div class="comment cmt"><p>Gets a list of tables for the specified dataset.
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt>returns</dt><dd class="cmt"><p>a list of tables
+</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt class="param">group</dt><dd class="cmt"><p>optional id of group</p></dd><dt>returns</dt><dd class="cmt"><p>a list of tables
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
@@ -625,20 +638,20 @@ do not exist an error will be returned.
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="com.granturing.spark.powerbi.Client#updateTableSchema" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="updateTableSchema(dataset:String,table:String,schema:com.granturing.spark.powerbi.Table):scala.concurrent.Future[Unit]"></a>
-      <a id="updateTableSchema(String,String,Table):Future[Unit]"></a>
+      <a id="updateTableSchema(dataset:String,table:String,schema:com.granturing.spark.powerbi.Table,group:Option[String]):scala.concurrent.Future[Unit]"></a>
+      <a id="updateTableSchema(String,String,Table,Option[String]):Future[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">updateTableSchema</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="schema">schema: <a href="Table.html" class="extype" name="com.granturing.spark.powerbi.Table">Table</a></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">updateTableSchema</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="table">table: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="schema">schema: <a href="Table.html" class="extype" name="com.granturing.spark.powerbi.Table">Table</a></span>, <span name="group">group: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <span class="extype" name="scala.concurrent.Future">Future</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Updates the schema of an existing table
 </p><div class="fullcomment"><div class="comment cmt"><p>Updates the schema of an existing table
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt class="param">table</dt><dd class="cmt"><p>the table name which to update</p></dd><dt>returns</dt><dd class="cmt"><p>a success or failure result
+</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>a dataset GUID</p></dd><dt class="param">table</dt><dd class="cmt"><p>the table name which to update</p></dd><dt class="param">group</dt><dd class="cmt"><p>optional id of group</p></dd><dt>returns</dt><dd class="cmt"><p>a success or failure result
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>

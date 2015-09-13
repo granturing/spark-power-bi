@@ -103,7 +103,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="ClientConf.html"><span class="name">ClientConf</span></a><span class="params">(<span name="token_uri">token_uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="resource">resource: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="uri">uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="clientid">clientid: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeout">timeout: <span class="extype" name="scala.concurrent.duration.Duration">Duration</span></span>, <span name="maxPartitions">maxPartitions: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="ClientConf.html"><span class="name">ClientConf</span></a><span class="params">(<span name="token_uri">token_uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="resource">resource: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="uri">uri: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="clientid">clientid: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="timeout">timeout: <span class="extype" name="scala.concurrent.duration.Duration">Duration</span></span>, <span name="maxPartitions">maxPartitions: <span class="extype" name="scala.Int">Int</span></span>, <span name="batchSize">batchSize: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">Specifies the client configuration options for connecting to the PowerBI service.</p>
@@ -133,16 +133,29 @@
       </span>
       </h4>
       
-    </li><li name="com.granturing.spark.powerbi.PowerBIDF" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PowerBIDFextendspackage.PowerBISink"></a>
-      <a id="PowerBIDF:PowerBIDF"></a>
+    </li><li name="com.granturing.spark.powerbi.DefaultSource" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="DefaultSourceextendsCreatableRelationProviderwithPowerBISink"></a>
+      <a id="DefaultSource:DefaultSource"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier">implicit </span>
+        <span class="modifier"></span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="package$$PowerBIDF.html"><span class="name">PowerBIDF</span></a><span class="result"> extends <span class="extype" name="com.granturing.spark.powerbi.PowerBISink">PowerBISink</span></span>
+        <a href="DefaultSource.html"><span class="name">DefaultSource</span></a><span class="result"> extends <span class="extype" name="org.apache.spark.sql.sources.CreatableRelationProvider">CreatableRelationProvider</span> with <span class="extype" name="com.granturing.spark.powerbi.PowerBISink">PowerBISink</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="com.granturing.spark.powerbi.Group" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="GroupextendsProductwithSerializable"></a>
+      <a id="Group:Group"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Group.html"><span class="name">Group</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
@@ -215,6 +228,19 @@
       </span>
       <span class="symbol">
         <a href="ClientConf$.html"><span class="name">ClientConf</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="com.granturing.spark.powerbi.RetentionPolicy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RetentionPolicy"></a>
+      <a id="RetentionPolicy:RetentionPolicy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="RetentionPolicy$.html"><span class="name">RetentionPolicy</span></a>
       </span>
       </h4>
       
