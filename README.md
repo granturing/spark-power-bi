@@ -1,5 +1,8 @@
 ![build](https://travis-ci.org/granturing/spark-power-bi.svg)
 
+# This is no longer being maintained
+Please see Azure Databricks for the latest [instructions](https://docs.azuredatabricks.net/user-guide/clusters/power-bi.html) on using Apache Spark with Power BI
+
 # spark-power-bi
 A library for pushing data from Spark, SparkSQL, or Spark Streaming to [Power BI](https://powerbi.com/).
 
